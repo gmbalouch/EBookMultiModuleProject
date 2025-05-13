@@ -1,6 +1,6 @@
 package org.Ebook.user_service.controller;
 
-import org.Ebook.user_service.entity.User;
+import org.Ebook.common_entities.entities.User;
 import org.Ebook.user_service.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
+    public User getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
@@ -32,12 +32,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable String id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id) {
+    public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 }

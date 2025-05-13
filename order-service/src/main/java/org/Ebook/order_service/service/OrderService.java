@@ -1,6 +1,8 @@
 package org.Ebook.order_service.service;
 
-import org.Ebook.order_service.entity.Order;
+import org.Ebook.common_entities.entities.Order;
+import org.Ebook.order_service.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,27 +12,35 @@ import java.util.Map;
 
 @Service
 public class OrderService {
-    private final Map<String, Order> orderStore = new HashMap<>();
+    @Autowired
+    private OrderRepository orderRepository;
 
     public List<Order> getAllOrders() {
-        return new ArrayList<>(orderStore.values());
+        return orderRepository.findAll();
     }
 
-    public Order getOrderById(String orderId) {
-        return orderStore.get(orderId);
+    public Order getOrderById(Long orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
     }
 
     public Order createOrder(Order order) {
-        orderStore.put(order.getOrderId(), order);
-        return order;
+        return orderRepository.save(order);
     }
 
-    public Order updateOrder(String orderId, Order updatedOrder) {
-        orderStore.put(orderId, updatedOrder);
-        return updatedOrder;
+    public Order updateOrder(Long orderId, Order updatedOrder) {
+        Order existingOrder= orderRepository.findById(orderId)
+                .orElseThrow(()-> new RuntimeException("Order not found with id:"+orderId));
+
+        existingOrder.setOrderDate(updatedOrder.getOrderDate());
+        existingOrder.setBooks(updatedOrder.getBooks());
+        existingOrder.setUser(updatedOrder.getUser());
+        existingOrder.setTotalAmount(updatedOrder.getTotalAmount());
+
+        return orderRepository.save(existingOrder);
     }
 
-    public void deleteOrder(String orderId) {
-        orderStore.remove(orderId);
+    public void deleteOrder(Long orderId) {
+       orderRepository.deleteById(orderId);
     }
 }

@@ -1,7 +1,8 @@
 package org.Ebook.book_service.controller;
 
-import org.Ebook.book_service.entity.Book;
+
 import org.Ebook.book_service.service.BookService;
+import org.Ebook.common_entities.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

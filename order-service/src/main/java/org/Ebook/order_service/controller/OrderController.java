@@ -1,6 +1,6 @@
 package org.Ebook.order_service.controller;
 
-import org.Ebook.order_service.entity.Order;
+import org.Ebook.common_entities.entities.Order;
 import org.Ebook.order_service.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Order getOrder(@PathVariable String id){
+    public Order getOrder(@PathVariable Long id){
         return orderService.getOrderById(id);
     }
 
@@ -31,12 +31,12 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable String id, @RequestBody Order order){
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order order){
         return orderService.updateOrder(id, order);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable String id){
+    public void deleteOrder(@PathVariable Long id){
         orderService.deleteOrder(id);
     }
 }
