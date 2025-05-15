@@ -1,6 +1,7 @@
 package org.Ebook.order_service.service;
 
 import org.Ebook.common_entities.entities.Order;
+import org.Ebook.common_entities.exception.OrderNotFoundException;
 import org.Ebook.order_service.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class OrderService {
 
     public Order getOrderById(Long orderId) {
         return orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
     }
 
     public Order createOrder(Order order) {
@@ -30,7 +31,7 @@ public class OrderService {
 
     public Order updateOrder(Long orderId, Order updatedOrder) {
         Order existingOrder= orderRepository.findById(orderId)
-                .orElseThrow(()-> new RuntimeException("Order not found with id:"+orderId));
+                .orElseThrow(()-> new OrderNotFoundException(orderId));
 
         existingOrder.setOrderDate(updatedOrder.getOrderDate());
         existingOrder.setBooks(updatedOrder.getBooks());

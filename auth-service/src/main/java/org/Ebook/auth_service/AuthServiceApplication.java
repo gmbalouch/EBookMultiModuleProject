@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "org.Ebook.common_entities.entities")
 @ComponentScan(basePackages = {
 		"org.Ebook.auth_service",
-		"org.Ebook.common_entities"
+		"org.Ebook.common_entities",
+		"org.Ebook.common_entities.exception"
 })
 public class AuthServiceApplication {
 

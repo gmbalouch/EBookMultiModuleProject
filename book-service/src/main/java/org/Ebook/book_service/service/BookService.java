@@ -2,6 +2,7 @@ package org.Ebook.book_service.service;
 
 import org.Ebook.book_service.repository.BookRepository;
 import org.Ebook.common_entities.entities.Book;
+import org.Ebook.common_entities.exception.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException( id));
     }
 
     public Book addBook(Book book) {
@@ -28,7 +29,7 @@ public class BookService {
 
     public Book updateBook(Long id, Book book) {
         Book existingBook= bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
+                .orElseThrow(() -> new BookNotFoundException( id));
         existingBook.setAuthor(book.getAuthor());
         existingBook.setTitle(book.getTitle());
 

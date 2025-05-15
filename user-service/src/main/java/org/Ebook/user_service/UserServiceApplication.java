@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"org.Ebook.user_service.reporistory"})
 @ComponentScan(basePackages = {
 		"org.Ebook.user_service",
-		"org.Ebook.common_entities"
+		"org.Ebook.common_entities",
+		"org.Ebook.common_entities.exception"
 })
 public class UserServiceApplication {
 

@@ -2,9 +2,9 @@ package org.Ebook.auth_service.service;
 
 import org.Ebook.auth_service.repository.AuthRepository;
 import org.Ebook.common_entities.entities.User;
+import org.Ebook.common_entities.exception.UsernameNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class AuthService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = authRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(username));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
@@ -54,7 +54,7 @@ public class AuthService {
 
     public User findByUsername(String username) throws UsernameNotFoundException {
         User user = authRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new  UsernameNotFoundException(username));
 
         return user;
     }

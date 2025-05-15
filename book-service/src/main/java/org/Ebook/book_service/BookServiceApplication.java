@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-		"org.Ebook.book_service",              // your local code
-		"org.Ebook.common_entities.security",  // 👈 needed for JwtFilter
-		"org.Ebook.common_entities.util"       // 👈 if JwtUtil is there, include this too
+		"org.Ebook.book_service",
+		"org.Ebook.common_entities.security",
+		"org.Ebook.common_entities.util",
+		"org.Ebook.common_entities.exception"//
 })
 @EntityScan(basePackages = "org.Ebook.common_entities.entities")
 @EnableJpaRepositories(basePackages = "org.Ebook.book_service.repository")

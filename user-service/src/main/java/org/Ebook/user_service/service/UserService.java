@@ -2,6 +2,7 @@ package org.Ebook.user_service.service;
 
 
 import org.Ebook.common_entities.entities.User;
+import org.Ebook.common_entities.exception.UserNotFoundException;
 import org.Ebook.user_service.reporistory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class UserService {
 
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     public User createUser(User user) {
@@ -30,7 +31,7 @@ public class UserService {
 
     public User updateUser(Long userId, User updatedUser) {
         User existingUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new UserNotFoundException(userId));
         existingUser.setUsername(updatedUser.getUsername());
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setPassword(updatedUser.getPassword());
