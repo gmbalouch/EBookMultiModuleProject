@@ -3,11 +3,18 @@ package org.Ebook.book_service;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {
+		"org.Ebook.book_service",              // your local code
+		"org.Ebook.common_entities.security",  // 👈 needed for JwtFilter
+		"org.Ebook.common_entities.util"       // 👈 if JwtUtil is there, include this too
+})
 @EntityScan(basePackages = "org.Ebook.common_entities.entities")
 @EnableJpaRepositories(basePackages = "org.Ebook.book_service.repository")
+
 public class BookServiceApplication {
 
 	public static void main(String[] args) {

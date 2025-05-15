@@ -2,6 +2,7 @@ package org.Ebook.user_service.controller;
 
 import org.Ebook.common_entities.entities.User;
 import org.Ebook.user_service.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
